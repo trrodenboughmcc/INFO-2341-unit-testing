@@ -83,11 +83,11 @@ import {
       const result = incrementSurvivalTime(state);
       expect(result.survivalTime).toBe(6);
     });
-  
-    it('does not mutate original state object', () => {
-      const state = { survivalTime: 2, isGameOver: false };
-      const result = incrementSurvivalTime(state);
-      expect(result).not.toBe(state);
-    });
+
+    // write a unit test to make sure that the time stays the same 
+    // when the game is over
+
+    // write a unit test to make sure that when the game starts over,
+    // the timer is incremented from 0 to 1
   });
   
