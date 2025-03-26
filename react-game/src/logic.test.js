@@ -85,7 +85,7 @@ import {
     });
 
     // write a unit test to make sure that the time stays the same 
-    // when the game is over
+    // when isGameOver is true
 
     // write a unit test to make sure that when the game starts over,
     // the timer is incremented from 0 to 1
