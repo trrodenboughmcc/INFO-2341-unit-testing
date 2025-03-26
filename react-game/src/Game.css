@@ -1,0 +1,14 @@
+/* Game.css */
+.game-container {
+    background-color: #121212;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+    width: fit-content;
+  }
+  
+  canvas {
+    background-color: #1e1e1e;
+    border: 2px solid #444;
+  }
+  
