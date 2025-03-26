@@ -1,4 +1,4 @@
-name: Vitest Tests with Coverage Tracking
+name: Run Vitest with Coverage
 
 on:
   push:
@@ -8,44 +8,37 @@ on:
 
 jobs:
   test:
-    name: Run Unit Tests and Track Coverage
+    name: Run Unit Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: react-game  # ensures the commands run in your actual project folder
 
     steps:
-      # Step 1: Checkout code
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node
-      - name: Set up Node.js
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Step 3: Install dependencies
       - name: Install Dependencies
         run: npm ci
 
-      # Step 4: Run tests with coverage
-      - name: Run Vitest with coverage
+      - name: Run Tests with Coverage
         run: npx vitest run --coverage
 
-      # Step 5: Upload full HTML coverage report
       - name: Upload HTML Coverage Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
-            name: html-coverage-report
-            path: coverage/report-html/
+          name: coverage-report
+          path: react-game/coverage
 
-      # Step 6: Upload LCOV for coverage tracking (Codecov/Coveralls)
-      - name: Upload LCOV Report
-        uses: actions/upload-artifact@v4
-        with:
-            name: lcov-report
-            path: coverage/lcov.info
-
-      # Step 7: Annotate the PR (basic message + pointer to artifact)
-      - name: Annotate PR with Coverage Info
+      - name: Annotate with Test Summary
+        uses: dorny/test-reporter@v1
         if: always()
-        run: | 
-            echo "::notice title=Vitest Coverage Report:: Download the full report from workflow artifacts."
+        with:
+          name: Vitest Summary
+          path: react-game/test-results.json
+          reporter: jest-junit
