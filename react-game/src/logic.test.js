@@ -64,13 +64,19 @@ import {
     it('returns true when player overlaps an enemy', () => {
       const player = { x: 0, y: 0, size: 10 };
       const enemies = [{ x: 0, y: 0, size: 10 }];
-      expect(checkEnemyCollision(player, enemies)).toBe(true);
+      //made new variable and moved the function to new variable
+      const didCollide = checkEnemyCollision(player, enemies)
+      //took out code that got moved to new variable made above and inserted new variable 
+      expect(didCollide).toBe(true);
     });
   
     it('returns false when no enemies collide', () => {
       const player = { x: 0, y: 0, size: 10 };
       const enemies = [{ x: 100, y: 100, size: 10 }];
-      expect(checkEnemyCollision(player, enemies)).toBe(false);
+      //made variable below and moved code in expected to new var
+      const noCollide = checkEnemyCollision(player, enemies)
+      //added new var to expected to be tested
+      expect(noCollide).toBe(false);
     });
   });
   
